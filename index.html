@@ -5,12 +5,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Music bar</title>
 	<style>
+
 		*{
 			margin: 0;padding: 0;box-sizing: border-box;
 		}
 
-		.main{
+		div{
 			display: flex;
+		}
+
+		.main{
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
@@ -23,7 +27,6 @@
 			border-bottom: 2px solid #1b00ff;
 			width: 40%;
 			height: 50%;
-			display: flex;
 			flex-direction: column;
 			justify-content: end;
 			padding: 0 20px;
@@ -31,7 +34,6 @@
 		.bars{
 			width: 100%;
 			height: 100%;
-			display: flex;
 			flex-direction: row-reverse;
 			justify-content: space-between;
 			transform: scale(-1);
@@ -59,10 +61,15 @@
 
 		div:nth-child(2){
 			color: #fff;
-			display: flex;
 			padding-top: 15px;
 			font-family: monospace;
-    		font-size: 1.7vw;
+    	font-size: 1.7vw;
+		}
+		.clrs{
+			margin-top: 20px;
+			height: 70px;
+			width: 70px;
+			background: none;
 		}
 	</style>
 </head>
@@ -84,7 +91,22 @@
 			<h3>Speed : </h3>
 			<input type="range" name="" id="" value="5" min="1" max="5" onchange="document.querySelectorAll('.bar').forEach(item => {item.style.animationDuration = document.querySelector('input').value+'s'})">
 		</div>
+		<div>
+			<input type="color" id="clr1" class="clrs" value="#7a00ff">
+			<input type="color" id="clr2" class="clrs" value="#1b00ff">
+		</div>
 	</div>
+	<script>
+		var clrs = document.querySelectorAll('.clrs');
+		var bars = document.querySelectorAll('.bar');
+		clrs.forEach(item => {
+			item.onchange = ()=>{
+				bars.forEach(bar => {
+					bar.style.background = `linear-gradient(${clrs[0].value},${clrs[1].value})`
+				})
+			}
+		})
+	</script>
 </body>
 </html>
 
